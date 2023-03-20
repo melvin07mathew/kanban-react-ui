@@ -7,6 +7,8 @@ export default function Signup(){
     const [retype,setRetype] = useState("")
 
     return(
-        <div style={{backgroundColor:"red"}}></div>
+        <div className="container">
+
+        </div>
     )
 }

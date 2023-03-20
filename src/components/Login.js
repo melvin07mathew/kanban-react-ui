@@ -4,9 +4,19 @@ export default function Login(){
     const [user,setUser] = useState("");
     const [password,setPassword] = useState("");
 
-    function login_submit(event){
+    async function login_submit(event){
         event.preventDefault()
-        console.log(user,password)
+        let data = await fetch('/login?include_auth_token',{
+            method:'post',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify(user,password),
+        })
+        if (data.ok){
+            const value = await data.json();
+        }
+        
 
 }
     return(
