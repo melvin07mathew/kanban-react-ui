@@ -13,9 +13,7 @@ export default function Login(){
             },
             body:JSON.stringify(user,password),
         })
-        if (data.ok){
-            const value = await data.json();
-        }
+
         
 
 }
