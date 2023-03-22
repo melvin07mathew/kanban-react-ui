@@ -1,40 +1,20 @@
-import { useEffect, useState } from "react"
+import Cards from "./Cards";
 
-export default function List(){
-    const [list,setList] = useState([])
-    useEffect(()=>{
-        const fetch_data = async () => {
-            let value= await fetch("http://127.0.0.1:5000/api/kanban_board/list/card/melvin/1")
-            if(value.ok){
-                let list_data = await value.json()
-                setList(list_data)
-        }else{
-            console.log("failed")
-        }
-    }
-    fetch_data()},[])
-
-    return (
-        <div>
-            {
-            list.map((data)=>(
-                // <div className="row">
-            <div className="col-sm-3" key={data.card_id}>
-                <div className="card text-center mb-3" background-color="rgb(188, 233, 236)">
-                    <span>{data.card_id}</span>
-                    <span>{data.card_title}</span>
-                    <span>{data.content}</span>
-                    <span>{data.deadline}</span>
-                    <span>{data.status}</span>
+export default function List({data,cards}){
+    return(
+        <div className="col-sm-3" style={{margin:20}}>
+            <div className="card text-center mb-3">
+                <div className="card-body">
+                    <div className="btn-group">
+                        <button className="btn btn dropdown-toggle mb-3" type="button" data-bs-toggle="dropdown">{data.list_title}</button>
+                            <ul className="dropdown-menu">
+                                <li className="dropdown-item">Edit</li>
+                                <li className="dropdown-item">Delete</li>
+                            </ul>
+                    </div><br></br>
+                    <Cards key={data.list_id} cards={cards} list_id={data.list_id}></Cards>
                 </div>
-            </div>
-            // </div>
-        )
-            )
-}
-            
+            </div>            
         </div>
     )
 }
-
-
